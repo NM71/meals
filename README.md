@@ -17,8 +17,7 @@ It includes:
      <td>Meals Details Screen</td>
   </tr>
   <tr>
-    <td><img src="screenshots/Picture1.png
-" width=270 height=480></td>
+    <td><img src="screenshots/Picture1.png" width=270 height=480></td>
     <td><img src="![image](https://github.com/user-attachments/assets/d94741b0-1bcc-4e84-be20-9c5a3b3869e6)
 " width=270 height=480></td>
     <td><img src="![image](https://github.com/user-attachments/assets/d184d542-6b3e-424d-8881-17b1fe6e5987)
