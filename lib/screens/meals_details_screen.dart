@@ -19,6 +19,10 @@ class MealsDetailsScreen extends ConsumerWidget {
   // for listening to providers we need to include an extra parameter in the build() method
   // It's Widget ref property, however it is automatically globaly available in case of ConsumerStatefulWidget
   Widget build(BuildContext context, WidgetRef ref) {
+    final favoriteMeals = ref.watch(favoriteMealsProvider);
+
+    final isFavorite = favoriteMeals.contains(meal);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
@@ -36,17 +40,8 @@ class MealsDetailsScreen extends ConsumerWidget {
                   content: Text(wasAdded
                       ? 'Meal added to Favorites'
                       : 'Meal removed from Favorites')));
-
-              // // widget.onToggleFavorite(widget.meal);
-              // setState(() {
-              //   if (favIcon == Icons.star_outline) {
-              //     favIcon = Icons.star;
-              //   } else {
-              //     favIcon = Icons.star_outline;
-              //   }
-              // });
             },
-            icon: Icon(Icons.star),
+            icon: Icon(isFavorite ? Icons.star : Icons.star_outline),
           )
         ],
       ),
@@ -88,8 +83,9 @@ class MealsDetailsScreen extends ConsumerWidget {
             ),
             for (final steps in meal.steps)
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12.0, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                ),
                 child: Text(steps,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
