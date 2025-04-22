@@ -35,7 +35,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
     // Animation controller is set before the build method is called
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 600),
+      duration: const Duration(milliseconds: 300),
       // We always animate b/w two values
       // The animation will start from 0 and end at 1
       lowerBound: 0, // This is the default value
@@ -94,10 +94,14 @@ class _CategoriesScreenState extends State<CategoriesScreen>
               )
           ],
         ),
+
         // This function here in builder will execute for every tick of animation (like 60 times per second here)
-        builder: (context, child) => Padding(
-              padding: EdgeInsets.only(
-                top: 100 - _animationController.value * 100,
+        builder: (context, child) => SlideTransition(
+              position: _animationController.drive(
+                Tween(
+                  begin: const Offset(0, 0.3),
+                  end: Offset(0, 0),
+                ),
               ),
               child: child,
             ));
