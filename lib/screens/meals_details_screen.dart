@@ -41,7 +41,25 @@ class MealsDetailsScreen extends ConsumerWidget {
                       ? 'Meal added to Favorites'
                       : 'Meal removed from Favorites')));
             },
-            icon: Icon(isFavorite ? Icons.star : Icons.star_outline),
+            // AnimatedSwitcher is used to animate the transition from one widget to another
+            // It is used to animate the transition of the icon from star to star outline and vice versa
+            icon: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (child, animation) {
+                // This function should return a Transition Widget
+                return RotationTransition(
+                  turns: animation,
+                  child: child,
+                );
+              },
+              // We have to add a key to the child widget to animate it
+              // The key should be unique for each widget
+              // ValueKey is the key flutter will watch to know if the widget has changed
+              child: Icon(
+                isFavorite ? Icons.star : Icons.star_outline,
+                key: ValueKey(isFavorite),
+              ),
+            ),
           )
         ],
       ),
