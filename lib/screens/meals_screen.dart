@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meals/models/meal_model.dart';
 import 'package:meals/screens/meals_details_screen.dart';
 import 'package:meals/widgets/meal_item.dart';
+import 'package:page_transition/page_transition.dart';
 
 class MealsScreen extends StatelessWidget {
   const MealsScreen({
@@ -16,11 +17,21 @@ class MealsScreen extends StatelessWidget {
   // final void Function(MealModel meal) onToggleFavorite;
 
   void _selectMeal(BuildContext context, MealModel meal) {
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (ctx) => MealsDetailsScreen(
-              meal: meal,
-              // onToggleFavorite: onToggleFavorite,
-            )));
+    Navigator.of(context).push(
+      PageTransition(
+        child: MealsDetailsScreen(
+          meal: meal,
+        ),
+        type: PageTransitionType.scale,
+        alignment: Alignment.center,
+      ),
+    );
+
+    // Navigator.of(context).push(MaterialPageRoute(
+    //     builder: (ctx) => MealsDetailsScreen(
+    //           meal: meal,
+    //           // onToggleFavorite: onToggleFavorite,
+    //         )));
   }
 
   @override

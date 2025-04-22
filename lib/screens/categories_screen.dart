@@ -4,6 +4,7 @@ import 'package:meals/models/category_model.dart';
 import 'package:meals/models/meal_model.dart';
 import 'package:meals/screens/meals_screen.dart';
 import 'package:meals/widgets/category_grid_item.dart';
+import 'package:page_transition/page_transition.dart';
 
 // for custom (explicit) animations we need to convert stateless to stateful widget
 // We have to add animation to the state object
@@ -58,12 +59,22 @@ class _CategoriesScreenState extends State<CategoriesScreen>
         .where((meal) => meal.categories.contains(category.id))
         .toList();
 
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (ctx) => MealsScreen(
-              title: category.title,
-              meals: filteredMeals,
-              // onToggleFavorite: onToggleFavorite,
-            )));
+    Navigator.of(context).push(
+      PageTransition(
+        child: MealsScreen(
+          title: category.title,
+          meals: filteredMeals,
+        ),
+        type: PageTransitionType.rightToLeft,
+      ),
+    );
+
+    // Navigator.of(context).push(MaterialPageRoute(
+    //     builder: (ctx) => MealsScreen(
+    //           title: category.title,
+    //           meals: filteredMeals,
+    //           // onToggleFavorite: onToggleFavorite,
+    //         )));
   }
 
   @override

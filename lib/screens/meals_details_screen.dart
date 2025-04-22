@@ -48,7 +48,8 @@ class MealsDetailsScreen extends ConsumerWidget {
               transitionBuilder: (child, animation) {
                 // This function should return a Transition Widget
                 return RotationTransition(
-                  turns: animation,
+                  // Here Tween is infered as a num so we have to explicitly define it's type as a double
+                  turns: Tween<double>(begin: 0.5, end: 1).animate(animation),
                   child: child,
                 );
               },
@@ -67,12 +68,15 @@ class MealsDetailsScreen extends ConsumerWidget {
         child: Column(
           children: [
             // Image of the meal
-            FadeInImage(
-              placeholder: MemoryImage(kTransparentImage),
-              image: NetworkImage(meal.imageUrl),
-              fit: BoxFit.cover,
-              height: 300,
-              width: double.infinity,
+            Hero(
+              tag: meal.id,
+              child: FadeInImage(
+                placeholder: MemoryImage(kTransparentImage),
+                image: NetworkImage(meal.imageUrl),
+                fit: BoxFit.cover,
+                height: 300,
+                width: double.infinity,
+              ),
             ),
             const SizedBox(
               height: 14,
